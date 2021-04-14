@@ -4,9 +4,46 @@ import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+
+const optionsArray = [
+  {
+    label: "Here",
+    key: "keyHere"
+  },
+  {
+    label: "Here1",
+    key: "keyHere1"
+  },
+  {
+    label: "Here2",
+    key: "keyHere2"
+  },
+  {
+    label: "Here3",
+    key: "keyHere3"
+  },
+  {
+    label: "Here4",
+    key: "keyHere4"
+  },
+  {
+    label: "Here5",
+    key: "keyHere5"
+  },
+  {
+    label: "Here6",
+    key: "keyHere6"
+  }
+];
+
+const handleOnChange = (e) => {
+
+  console.log(e.target.value);
+};
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App optionsArray={optionsArray} onChange={handleOnChange} />
   </React.StrictMode>,
   document.getElementById("root")
 );

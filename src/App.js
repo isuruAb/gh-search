@@ -1,15 +1,21 @@
-import logo from "./logo.svg";
-import styles from "./App.scss";
+import { useState } from "react";
+import styles from "./app.module.scss";
+import DropdownOptions from "./components/DropdownOptions";
 
 function App({ onChange, value, optionsArray }) {
+  const [suggestions, setSuggestions] = useState([]);
+
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    const searchResult = optionsArray.filter((value) => value.label === e.target.value);
+    console.log("searchResult", searchResult);
+    setSuggestions(searchResult);
+    onChange(e);
+  };
   return (
     <div>
-      <input type="text" value={value} onChange={onChange} />
-      <div className={`${styles.dropdownOptions} position-absolute`}>
-        {optionsArray.map((data) => {
-          return <ul name={data.key}>{data.label}</ul>;
-        })}
-      </div>
+      <input type="text" value={value} onChange={handleChange} />
+      <DropdownOptions optionsArray={suggestions} />
     </div>
   );
 }
