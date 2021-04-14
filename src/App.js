@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import DropdownOptions from "./components/DropdownOptions";
 import { getData } from "./utils/api";
 
-function App({ onChange, value }) {
+function App({ onChange, dropdownStyles, dropdownBoxStyle }) {
   const [suggestions, setSuggestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -22,20 +22,24 @@ function App({ onChange, value }) {
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (searchTerm && !selectName) {
-        setToggleDropdown(true);
         const params = [{ key: "q", value: searchTerm }];
         const searchResult = await getData({ params });
+
         setSuggestions(searchResult?.items);
+        setToggleDropdown(true);
       }
+      setSelectName(false);
     }, 1000);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm]);
+  }, [searchTerm, selectName]);
 
   return (
     <div>
-      <input type="text" value={searchTerm} onChange={handleChange} />
-      {toggleDropdown && <DropdownOptions optionsArray={suggestions} onClick={handleSelect} value="login" label="login" />}
+      <input type="text" value={searchTerm} onChange={handleChange} className={dropdownBoxStyle} />
+      {toggleDropdown && (
+        <DropdownOptions optionsArray={suggestions} onClick={handleSelect} value="login" label="login" dropdownWrapper={dropdownStyles} />
+      )}
     </div>
   );
 }
