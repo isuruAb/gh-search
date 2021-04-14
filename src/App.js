@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import styles from "./app.module.scss";
 import DropdownOptions from "./components/DropdownOptions";
 import { getData } from "./utils/api";
 
@@ -27,7 +26,7 @@ function App({ onChange, value, optionsArray }) {
   return (
     <div>
       <input type="text" value={value} onChange={handleChange} />
-      <DropdownOptions optionsArray={suggestions} key="login" label="login" />
+      <DropdownOptions optionsArray={suggestions} value="login" label="login" />
     </div>
   );
 }
