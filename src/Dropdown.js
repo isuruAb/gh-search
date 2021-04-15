@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import DropdownOptions from "./components/DropdownOptions";
 import { getData } from "./utils/api";
+import PropTypes from "prop-types";
 
 function Dropdown({ onChange, dropdownStyles, dropdownBoxStyle }) {
   const [suggestions, setSuggestions] = useState([]);
@@ -81,5 +82,11 @@ function Dropdown({ onChange, dropdownStyles, dropdownBoxStyle }) {
     </div>
   );
 }
+
+DropdownOptions.propTypes = {
+  onChange: PropTypes.func,
+  dropdownStyles: PropTypes.object,
+  dropdownBoxStyle: PropTypes.object
+};
 
 export default Dropdown;
