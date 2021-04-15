@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/custom.scss";
 import styles from "./index.module.scss";
-import App from "./App";
+import Dropdown from "./Dropdown";
 import reportWebVitals from "./reportWebVitals";
 
 const handleOnChange = (value) => {
@@ -13,7 +13,7 @@ const handleOnChange = (value) => {
 ReactDOM.render(
   <React.StrictMode>
     <div className={styles.mainWrapper}>
-      <App onChange={handleOnChange} dropdownStyles={styles.dropdownWrapper} dropdownBoxStyle={styles.dropdownBoxWrapper} />
+      <Dropdown onChange={handleOnChange} dropdownStyles={styles.dropdownWrapper} dropdownBoxStyle={styles.dropdownBoxWrapper} />
       <h1>GitHub Username Search Field</h1>
     </div>
 

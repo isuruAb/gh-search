@@ -2,38 +2,44 @@ import { useState, useEffect, useRef } from "react";
 import DropdownOptions from "./components/DropdownOptions";
 import { getData } from "./utils/api";
 
-function App({ onChange, dropdownStyles, dropdownBoxStyle }) {
+function Dropdown({ onChange, dropdownStyles, dropdownBoxStyle }) {
   const [suggestions, setSuggestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const [selectName, setSelectName] = useState(false);
 
   const handleChange = (e) => {
-    setSearchTerm(e?.target?.value || e?.currentTarget?.dataset?.id);
-    onChange(e?.target?.value || e?.currentTarget?.dataset?.id);
+    if (e?.currentTarget?.dataset?.id) {
+      onChange(e?.currentTarget?.dataset?.id);
+      setSearchTerm(e?.currentTarget?.dataset?.id);
+    }
+    if (e?.target?.value) {
+      onChange(e?.target?.value);
+      setSearchTerm(e?.target?.value);
+      setSelectName(false);
+    }
   };
 
   const handleSelect = (e) => {
-    setToggleDropdown(false);
     setSelectName(true);
+    setToggleDropdown(false);
     handleChange(e);
   };
 
+  //
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (searchTerm && !selectName) {
         const params = [{ key: "q", value: searchTerm }];
         const searchResult = await getData({ params });
-
         setSuggestions(searchResult?.items);
         setToggleDropdown(true);
       }
-      setSelectName(false);
-    }, 1000);
-
+    }, 500);
     return () => clearTimeout(delayDebounceFn);
   }, [searchTerm, selectName]);
 
+  // Close the dropdown on clicking outside
   const useOutsideClick = (ref) => {
     useEffect(() => {
       const handleClickOutside = (event) => {
@@ -41,7 +47,6 @@ function App({ onChange, dropdownStyles, dropdownBoxStyle }) {
           setToggleDropdown(false);
         }
       };
-
       // Bind the event listener
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
@@ -66,4 +71,4 @@ function App({ onChange, dropdownStyles, dropdownBoxStyle }) {
   );
 }
 
-export default App;
+export default Dropdown;
