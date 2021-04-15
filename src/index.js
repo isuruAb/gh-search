@@ -13,10 +13,13 @@ const handleOnChange = (value) => {
 ReactDOM.render(
   <React.StrictMode>
     <div className={styles.mainWrapper}>
-      <Dropdown onChange={handleOnChange} dropdownStyles={styles.dropdownWrapper} dropdownBoxStyle={styles.dropdownBoxWrapper} />
+      <Dropdown
+        onChange={handleOnChange}
+        dropdownStyles={styles.dropdownWrapper}
+        dropdownBoxStyle={styles.dropdownBoxWrapper}
+      />
       <h1>GitHub Username Search Field</h1>
     </div>
-
   </React.StrictMode>,
   document.getElementById("root")
 );

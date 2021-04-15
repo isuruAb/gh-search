@@ -26,7 +26,7 @@ function Dropdown({ onChange, dropdownStyles, dropdownBoxStyle }) {
     handleChange(e);
   };
 
-  //
+  // Send API request 0.5 seconds after user stop typing
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (searchTerm && !selectName) {
@@ -61,10 +61,21 @@ function Dropdown({ onChange, dropdownStyles, dropdownBoxStyle }) {
 
   return (
     <div>
-      <input type="text" value={searchTerm} onChange={handleChange} className={dropdownBoxStyle} />
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleChange}
+        className={dropdownBoxStyle}
+      />
       {toggleDropdown && (
         <div ref={wrapperRef}>
-          <DropdownOptions optionsArray={suggestions} onClick={handleSelect} value="login" label="login" dropdownWrapper={dropdownStyles} />
+          <DropdownOptions
+            optionsArray={suggestions}
+            onClick={handleSelect}
+            value="login"
+            label="login"
+            dropdownWrapper={dropdownStyles}
+          />
         </div>
       )}
     </div>
