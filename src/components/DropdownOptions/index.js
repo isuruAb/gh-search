@@ -9,13 +9,15 @@ function DropdownOptions({
 }) {
   return (
     <div className={`${styles.dropdownOptions} ${dropdownWrapper}`}>
+     <ul>
       {optionsArray?.map((data, index) => {
         return (
-          <ul key={index} data-id={data?.[value]} onClick={onClick}>
+          <li key={index} data-id={data?.[value]} onClick={onClick}>
             {data?.[label]}
-          </ul>
+          </li>
         );
       })}
+      </ul>
     </div>
   );
 }
